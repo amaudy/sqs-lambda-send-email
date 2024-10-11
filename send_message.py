@@ -2,6 +2,7 @@ import boto3
 import json
 import subprocess
 import time
+import uuid
 
 # Get the queue URL from Terraform output
 result = subprocess.run(['terraform', 'output', '-raw', 'queue_url'], capture_output=True, text=True)
@@ -12,7 +13,7 @@ sqs = boto3.client('sqs')
 
 # Message to send
 message = {
-    "id": 1,
+    "id": str(uuid.uuid4()),
     "content": "Hello, SQS!",
     "timestamp": time.time()
 }
