@@ -15,10 +15,16 @@ resource "aws_iam_role" "lambda_role" {
     ]
   })
 
-  # Add this lifecycle block
   lifecycle {
     create_before_destroy = true
   }
+
+  tags = merge(
+    var.common_tags,
+    {
+      Name = "demo-lambda-role-consumer-one"
+    }
+  )
 }
 
 resource "random_id" "role_suffix" {
@@ -57,6 +63,13 @@ resource "aws_lambda_function" "process_sqs_message" {
       S3_BUCKET = var.s3_bucket_id
     }
   }
+
+  tags = merge(
+    var.common_tags,
+    {
+      Name = "process-sqs-message-consumer-one"
+    }
+  )
 }
 
 # Create SQS trigger for Lambda

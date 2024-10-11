@@ -23,6 +23,13 @@ resource "aws_iam_role" "lambda_role" {
   lifecycle {
     create_before_destroy = true
   }
+
+  tags = merge(
+    var.common_tags,
+    {
+      Name = "demo-lambda-role-consumer-two"
+    }
+  )
 }
 
 # Attach policies to the Lambda role
@@ -39,6 +46,13 @@ resource "aws_iam_role_policy_attachment" "lambda_s3_policy" {
 # Create S3 bucket for consumer_two
 resource "aws_s3_bucket" "consumer_two_bucket" {
   bucket = "sqs-consumer-two-${random_id.bucket_suffix.hex}"
+
+  tags = merge(
+    var.common_tags,
+    {
+      Name = "sqs-consumer-two-bucket"
+    }
+  )
 }
 
 resource "random_id" "bucket_suffix" {
@@ -66,6 +80,13 @@ resource "aws_lambda_function" "process_sqs_message" {
       S3_BUCKET = aws_s3_bucket.consumer_two_bucket.id
     }
   }
+
+  tags = merge(
+    var.common_tags,
+    {
+      Name = "process-sqs-message-consumer-two"
+    }
+  )
 }
 
 # The SQS trigger for Lambda has been removed
