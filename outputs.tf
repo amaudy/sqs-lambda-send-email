@@ -17,3 +17,13 @@ output "lambda_function_name" {
   description = "The name of the Lambda function"
   value       = module.consumer_one.lambda_function_name
 }
+
+output "consumer_two_lambda_function_name" {
+  description = "The name of the consumer_two Lambda function"
+  value       = module.consumer_two.lambda_function_name
+}
+
+output "consumer_two_s3_bucket_name" {
+  description = "The name of the S3 bucket for consumer_two"
+  value       = module.consumer_two.s3_bucket_name
+}

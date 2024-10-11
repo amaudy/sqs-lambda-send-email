@@ -42,3 +42,10 @@ module "consumer_one" {
   sqs_queue_arn = aws_sqs_queue.demo_queue.arn
   s3_bucket_id  = aws_s3_bucket.message_store.id
 }
+
+# Call the consumer_two module
+module "consumer_two" {
+  source = "./modules/consumer_two"
+
+  sqs_queue_arn = aws_sqs_queue.demo_queue.arn
+}
