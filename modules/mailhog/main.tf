@@ -8,6 +8,10 @@ data "aws_ami" "amazon_linux_2" {
   }
 }
 
+data "http" "myip" {
+  url = "http://ipv4.icanhazip.com"
+}
+
 resource "aws_security_group" "mailhog" {
   name        = "mailhog-sg"
   description = "Security group for Mailhog EC2 instance"
@@ -16,7 +20,7 @@ resource "aws_security_group" "mailhog" {
     from_port   = 8025
     to_port     = 8025
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["${chomp(data.http.myip.response_body)}/32"]
     description = "Mailhog Web UI"
   }
 
@@ -24,7 +28,7 @@ resource "aws_security_group" "mailhog" {
     from_port   = 1025
     to_port     = 1025
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["${chomp(data.http.myip.response_body)}/32"]
     description = "Mailhog SMTP"
   }
 
@@ -32,7 +36,7 @@ resource "aws_security_group" "mailhog" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["${chomp(data.http.myip.response_body)}/32"]
   }
 
   tags = merge(
