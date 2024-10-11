@@ -68,3 +68,10 @@ module "consumer_two" {
   sqs_queue_arn = aws_sqs_queue.demo_queue.arn
   common_tags   = local.common_tags
 }
+
+# Call the mailhog module
+module "mailhog" {
+  source = "./modules/mailhog"
+
+  common_tags = local.common_tags
+}
