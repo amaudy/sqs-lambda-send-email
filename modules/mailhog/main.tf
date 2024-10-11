@@ -28,7 +28,7 @@ resource "aws_security_group" "mailhog" {
     from_port   = 1025
     to_port     = 1025
     protocol    = "tcp"
-    cidr_blocks = ["${chomp(data.http.myip.response_body)}/32"]
+    cidr_blocks = ["0.0.0.0/0"]
     description = "Mailhog SMTP"
   }
 
