@@ -38,3 +38,15 @@ output "mailhog_web_ui_url" {
 #   description = "The name of the consumer_two Lambda function"
 #   value       = module.consumer_two.lambda_function_name
 # }
+
+# Add these to the existing outputs.tf file
+
+output "email_sender_lambda_function_name" {
+  description = "The name of the email sender Lambda function"
+  value       = module.email_sender.lambda_function_name
+}
+
+output "email_sender_lambda_function_arn" {
+  description = "The ARN of the email sender Lambda function"
+  value       = module.email_sender.lambda_function_arn
+}

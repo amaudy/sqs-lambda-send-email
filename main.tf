@@ -75,3 +75,13 @@ module "mailhog" {
 #   sqs_queue_arn = aws_sqs_queue.demo_queue.arn
 #   common_tags   = local.common_tags
 # }
+
+# Add this to the existing main.tf file
+
+module "email_sender" {
+  source = "./modules/email_sender"
+
+  sqs_queue_arn        = aws_sqs_queue.demo_queue.arn
+  mailhog_smtp_endpoint = module.mailhog.smtp_endpoint
+  common_tags          = local.common_tags
+}
