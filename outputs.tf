@@ -13,21 +13,6 @@ output "s3_bucket_name" {
   value       = aws_s3_bucket.message_store.id
 }
 
-output "lambda_function_name" {
-  description = "The name of the Lambda function"
-  value       = module.consumer_one.lambda_function_name
-}
-
-output "consumer_two_lambda_function_name" {
-  description = "The name of the consumer_two Lambda function"
-  value       = module.consumer_two.lambda_function_name
-}
-
-output "consumer_two_s3_bucket_name" {
-  description = "The name of the S3 bucket for consumer_two"
-  value       = module.consumer_two.s3_bucket_name
-}
-
 output "mailhog_public_ip" {
   description = "The public IP address of the Mailhog instance"
   value       = module.mailhog.public_ip
@@ -42,3 +27,14 @@ output "mailhog_web_ui_url" {
   description = "The URL for accessing Mailhog Web UI"
   value       = module.mailhog.web_ui_url
 }
+
+# Commented out consumer_one and consumer_two outputs
+# output "consumer_one_lambda_function_name" {
+#   description = "The name of the consumer_one Lambda function"
+#   value       = module.consumer_one.lambda_function_name
+# }
+#
+# output "consumer_two_lambda_function_name" {
+#   description = "The name of the consumer_two Lambda function"
+#   value       = module.consumer_two.lambda_function_name
+# }

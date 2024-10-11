@@ -52,26 +52,26 @@ resource "random_id" "bucket_suffix" {
   byte_length = 8
 }
 
-# Call the consumer_one module
-module "consumer_one" {
-  source = "./modules/consumer_one"
-
-  sqs_queue_arn = aws_sqs_queue.demo_queue.arn
-  s3_bucket_id  = aws_s3_bucket.message_store.id
-  common_tags   = local.common_tags
-}
-
-# Call the consumer_two module
-module "consumer_two" {
-  source = "./modules/consumer_two"
-
-  sqs_queue_arn = aws_sqs_queue.demo_queue.arn
-  common_tags   = local.common_tags
-}
-
 # Call the mailhog module
 module "mailhog" {
   source = "./modules/mailhog"
 
   common_tags = local.common_tags
 }
+
+# Commented out consumer_one module
+# module "consumer_one" {
+#   source = "./modules/consumer_one"
+#
+#   sqs_queue_arn = aws_sqs_queue.demo_queue.arn
+#   s3_bucket_id  = aws_s3_bucket.message_store.id
+#   common_tags   = local.common_tags
+# }
+
+# Commented out consumer_two module
+# module "consumer_two" {
+#   source = "./modules/consumer_two"
+#
+#   sqs_queue_arn = aws_sqs_queue.demo_queue.arn
+#   common_tags   = local.common_tags
+# }
