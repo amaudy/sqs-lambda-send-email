@@ -11,19 +11,26 @@ queue_url = result.stdout.strip()
 # Create SQS client
 sqs = boto3.client('sqs')
 
-# Message to send
-message = {
-    "id": str(uuid.uuid4()),
-    "content": "Hello, SQS!",
-    "timestamp": time.time()
-}
+# Function to send a single message
+def send_message(message_number):
+    message = {
+        "id": str(uuid.uuid4()),
+        "content": f"Hello, SQS! Message {message_number}",
+        "timestamp": time.time()
+    }
 
-# Send message to SQS queue
-response = sqs.send_message(
-    QueueUrl=queue_url,
-    MessageBody=json.dumps(message),
-    MessageGroupId='group1',
-    MessageDeduplicationId=str(int(time.time()))
-)
+    response = sqs.send_message(
+        QueueUrl=queue_url,
+        MessageBody=json.dumps(message),
+        MessageGroupId='group1',
+        MessageDeduplicationId=str(int(time.time() * 1000))  # Use milliseconds for deduplication
+    )
 
-print(f"Message sent. Message ID: {response['MessageId']}")
+    print(f"Message {message_number} sent. Message ID: {response['MessageId']}")
+
+# Send 100 messages with 1 second delay between each
+for i in range(1, 101):
+    send_message(i)
+    time.sleep(1)  # Wait for 1 second
+
+print("All messages sent.")
