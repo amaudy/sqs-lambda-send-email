@@ -68,9 +68,4 @@ resource "aws_lambda_function" "process_sqs_message" {
   }
 }
 
-# Create SQS trigger for Lambda
-resource "aws_lambda_event_source_mapping" "sqs_trigger" {
-  event_source_arn = var.sqs_queue_arn
-  function_name    = aws_lambda_function.process_sqs_message.arn
-  batch_size       = 1
-}
+# The SQS trigger for Lambda has been removed
