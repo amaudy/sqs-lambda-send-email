@@ -29,7 +29,7 @@ def send_message(message_number):
     print(f"Message {message_number} sent. Message ID: {response['MessageId']}")
 
 # Send 100 messages with 1 second delay between each
-for i in range(1, 101):
+for i in range(1, 11):
     send_message(i)
     time.sleep(1)  # Wait for 1 second
 
