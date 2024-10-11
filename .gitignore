@@ -39,3 +39,9 @@ tfplan
 
 env
 *.zip
+
+# Exclude the ZIP file created by Terraform
+modules/consumer_one/lambda_function.zip
+
+# Exclude the src directory
+modules/consumer_one/src/

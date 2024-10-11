@@ -1,12 +1,5 @@
-# POC-SQS
+# SQS and Lambda Project
 
-## Description
-This is a simple POC to test SQS with Python.
+This project sets up an AWS SQS queue, an S3 bucket, and a Lambda function to process messages.
 
-```bash
-aws sqs send-message \
-    --queue-url $(terraform output -raw queue_url) \
-    --message-body "Hello, SQS!" \
-    --message-group-id "group1" \
-    --message-deduplication-id "$(date +%s)"
-```
+## Structure
