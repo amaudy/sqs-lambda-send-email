@@ -1,6 +1,6 @@
 # SQS and Lambda Project
 
-This project sets up an AWS SQS queue, an S3 bucket, and a Lambda function to process messages.
+This project sets up an AWS SQS queue, an S3 bucket, and a Lambda function to process messages by send email to mailhog.
 
 ## Structure
 
@@ -22,7 +22,17 @@ The security group rules are defined in the `security.tf` file. The configuratio
 ## Terraform Usage
 
 1. Initialize Terraform: `terraform init`
-2. Plan the changes: `terraform plan`
-3. Apply the changes: `terraform apply`
+2. Plan the changes: `terraform plan -out tfplan`
+3. Apply the changes: `terraform apply "tfplan"`
 
 The configuration will automatically use your current public IP address when applying the security group rule.
+
+
+### With MailHog
+
++-----------+          +-----------+          +------------+          +------------+          +--------------+
+|           |          |           |          |            |          |            |          |              |
+| CLI Tool  +--------->| AWS SQS   +--------->| AWS Lambda +--------->| MailHog    +--------->| Email Server |
+| (Put Msg) |          | (Queue)   |          |  Function  |          | (SMTP)     |          |              |
+|           |          |           |          |            |          |            |          |              |
++-----------+          +-----------+          +------------+          +------------+          +--------------+
