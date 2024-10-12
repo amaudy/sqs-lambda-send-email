@@ -30,9 +30,11 @@ The configuration will automatically use your current public IP address when app
 
 ### With MailHog
 
+```bash
 +-----------+          +-----------+          +------------+          +------------+          +--------------+
 |           |          |           |          |            |          |            |          |              |
 | CLI Tool  +--------->| AWS SQS   +--------->| AWS Lambda +--------->| MailHog    +--------->| Email Server |
 | (Put Msg) |          | (Queue)   |          |  Function  |          | (SMTP)     |          |              |
 |           |          |           |          |            |          |            |          |              |
 +-----------+          +-----------+          +------------+          +------------+          +--------------+
+```
